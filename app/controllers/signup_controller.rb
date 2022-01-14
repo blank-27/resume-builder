@@ -16,7 +16,7 @@ class SignupController < ApplicationController
          if @newUser.save
             flash[:success] = "Account Created.Please log In :)"
             # @user = @newUser
-            @newUser.profile = Profile.new
+            @newUser.profile = Profile.new #save default
             redirect_to login_path
          else
             flash[:errors] = "Try Again.Email Already Taken"

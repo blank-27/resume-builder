@@ -42,4 +42,5 @@ class TailwindInputBuilder < ActionView::Helpers::FormBuilder
             )
         )
     end
+    
 end
