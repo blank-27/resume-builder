@@ -7,9 +7,6 @@ class CreateExperiences < ActiveRecord::Migration[6.1]
       t.date :end
       t.string :description
 
-
-      t.belongs_to :profile, index: true, foreign_key: true
-
       t.timestamps
     end
   end
