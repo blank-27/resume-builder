@@ -7,7 +7,14 @@ Rails.application.routes.draw do
   post  'signup'  => 'signup#new'
   delete 'logout'  => 'sessions#destroy'
 
-  resources :profiles , only: [:update]
+  resources :profiles , only: [:index, :update] do
+    collection do
+      get 'public/:id', to: 'profiles#share', as: 'public'
+    end
+  end
+
   resources :educations , only: [:new]
+  resources :experiences , only: [:new, :update]
+  resources :projects , only: [:new , :update]
 end 
 

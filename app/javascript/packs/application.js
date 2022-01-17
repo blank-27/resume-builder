@@ -10,6 +10,15 @@ import "channels"
 
 import "stylesheets/application"
 
+//= require clipboard
+//= require turbolinks
+//= require clipboard
+//= require jquery
+//= require jquery_ujs
+
+
+
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

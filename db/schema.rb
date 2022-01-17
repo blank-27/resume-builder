@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_194309) do
+ActiveRecord::Schema.define(version: 2022_01_15_114400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(version: 2022_01_12_194309) do
     t.index ["profile_id"], name: "index_educations_on_profile_id"
   end
 
+  create_table "experiences", force: :cascade do |t|
+    t.string "company"
+    t.string "position"
+    t.date "start"
+    t.date "end"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "profile_id", null: false
+    t.index ["profile_id"], name: "index_experiences_on_profile_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.string "job_title"
@@ -68,7 +80,24 @@ ActiveRecord::Schema.define(version: 2022_01_12_194309) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
   end
-  
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.string "prurl"
+    t.string "stack"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "experience_id", null: false
+    t.index ["experience_id"], name: "index_projects_on_experience_id"
+  end
+
+  create_table "uimages", force: :cascade do |t|
+    t.text "image_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "userdetails", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -89,5 +118,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_194309) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "educations", "profiles"
+  add_foreign_key "experiences", "profiles"
   add_foreign_key "profiles", "users"
+  add_foreign_key "projects", "experiences"
 end
